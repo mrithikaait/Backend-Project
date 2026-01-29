@@ -1,0 +1,14 @@
+app:
+  env: staging
+  port: 3000
+
+database:
+  host: localhost
+  port: 27017
+  # user: dev_user
+  # pass: dev_pass
+  name: nestdb
+
+mail:
+  user: staging@gmail.com
+  pass: stagingpassword

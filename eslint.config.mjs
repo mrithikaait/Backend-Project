@@ -1,0 +1,45 @@
+// eslint.config.mjs
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export default tseslint.config(
+  {
+    ignores: ['dist/', 'node_modules/', 'eslint.config.mjs'],
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  eslintPluginPrettierRecommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
+      sourceType: 'module',
+      parserOptions: {
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: path.dirname(fileURLToPath(import.meta.url)),
+      },
+    },
+    rules: {
+      // 🔹 Important rules (keep ON)
+      '@typescript-eslint/no-unused-vars': ['error'],
+      '@typescript-eslint/no-floating-promises': 'error',
+
+      // 🔹 Relax noisy rules (for now – best for learning)
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+    },
+  },
+);

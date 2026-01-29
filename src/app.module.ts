@@ -18,16 +18,15 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
   imports: [
-    // 🔹 Load ONLY YAML config (no .env)
+   
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
     }),
 
-    // 🔹 Enable Cron Jobs
+   
     ScheduleModule.forRoot(),
 
-    // 🔹 Redis / Bull (from YAML)
     BullModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -38,7 +37,6 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       }),
     }),
 
-    // 🔹 MongoDB (from YAML)
     MongooseModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -46,7 +44,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
       }),
     }),
 
-    // 🔹 Your feature modules (ALL API MODULES HERE 👇)
+
     UsersModule,
     SeedModule,
     AuthModule,
@@ -54,7 +52,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     MailModule,
     TasksModule,
     StudentsModule,
-    PaymentsModule, // ✅ Correct place for Students API
+    PaymentsModule,
   ],
 })
 export class AppModule implements NestModule {

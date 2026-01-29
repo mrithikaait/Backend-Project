@@ -12,7 +12,6 @@ export class User extends Document {
   @Prop({ required: true })
   password: string;
 
-  // 🔹 Role reference (IMPORTANT FIX)
   @Prop({ type: Types.ObjectId, ref: 'Role' })
   role: Types.ObjectId;
 

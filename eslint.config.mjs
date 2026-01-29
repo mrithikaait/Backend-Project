@@ -1,4 +1,4 @@
-// eslint.config.mjs
+
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -26,11 +26,11 @@ export default tseslint.config(
       },
     },
     rules: {
-      // 🔹 Important rules (keep ON)
+
       '@typescript-eslint/no-unused-vars': ['error'],
       '@typescript-eslint/no-floating-promises': 'error',
 
-      // 🔹 Relax noisy rules (for now – best for learning)
+     
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',

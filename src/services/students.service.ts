@@ -8,14 +8,14 @@ export class StudentsService
   implements IStudentService
 {
   addStudent(name: string) {
-    this.items.push(name); // 👈 using BaseService storage
-    this.log('Student added'); // 👈 inherited log()
+    this.items.push(name); 
+    this.log('Student added'); 
     return 'Student Added';
   }
 
   getStudents() {
     this.log('Getting students');
-    return this.findAll(); // 👈 inherited findAll()
+    return this.findAll(); 
   }
 
   getHello() {

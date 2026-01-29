@@ -21,7 +21,6 @@ export class MailService implements OnModuleInit {
     });
   }
 
-  // 🔥 ESM FIX HAPPENS HERE
   async onModuleInit() {
     const hbsModule = await import('nodemailer-express-handlebars');
     const hbs = hbsModule.default;
@@ -53,7 +52,7 @@ export class MailService implements OnModuleInit {
           name,
           email,
         },
-      } as any); // 👈 TS FIX
+      } as any);
 
       return { message: 'Mail sent successfully' };
     } catch (error) {

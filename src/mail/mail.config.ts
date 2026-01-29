@@ -23,7 +23,7 @@ export const createTransporter = (configService: ConfigService) => {
     },
   });
 
-  // Setup handlebars template engine
+
   transporter.use(
     'compile',
     hbs({

@@ -9,20 +9,17 @@ export class ProductsService {
     @InjectModel(Product.name) private productModel: Model<Product>,
   ) {}
 
-  // 🔹 CREATE
   async create(data: any) {
     const product = new this.productModel(data);
     return product.save();
   }
 
-  // 🔹 READ ONE
   async findOne(id: string) {
     const product = await this.productModel.findById(id);
     if (!product) throw new NotFoundException('Product not found');
     return product;
   }
 
-  // 🔹 UPDATE
   async update(id: string, data: any) {
     const product = await this.productModel.findByIdAndUpdate(id, data, {
       new: true,
@@ -31,14 +28,14 @@ export class ProductsService {
     return product;
   }
 
-  // 🔹 DELETE
+  
   async remove(id: string) {
     const product = await this.productModel.findByIdAndDelete(id);
     if (!product) throw new NotFoundException('Product not found');
     return { message: 'Product deleted successfully' };
   }
 
-  // 🔹 SERVER SIDE LIST WITH FILTER + SORT + PAGINATION  ⭐ MAIN FUNCTION
+
   async findAllServer(filters: any) {
     const {
       page = 1,
@@ -51,32 +48,29 @@ export class ProductsService {
 
     const query: any = {};
 
-    // 🔹 SEARCH BY NAME
+    
     if (search) {
       query.name = { $regex: search, $options: 'i' };
     }
 
-    // 🔹 PRICE RANGE FILTER
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) query.price.$gte = Number(minPrice);
       if (maxPrice) query.price.$lte = Number(maxPrice);
     }
 
-    // 🔹 SORTING
     const sortOption = sort === 'asc' ? 1 : -1;
 
-    // 🔹 PAGINATION
+    
     const skip = (Number(page) - 1) * Number(limit);
 
-    // 🔹 FETCH DATA
+    
     const products = await this.productModel
       .find(query)
       .sort({ price: sortOption })
       .skip(skip)
       .limit(Number(limit));
 
-    // 🔹 TOTAL COUNT (FOR PAGES)
     const total = await this.productModel.countDocuments(query);
 
     return {
@@ -88,14 +82,13 @@ export class ProductsService {
     };
   }
 
-  // 🔹 FILTER BY NAME (OLD SIMPLE API)
+  
   async filterByName(name: string) {
     return this.productModel.find({
       name: { $regex: name, $options: 'i' },
     });
   }
 
-  // 🔹 FILTER BY CREATED DATE
   async filterByDate(from: string, to: string) {
     return this.productModel.find({
       createdAt: {
@@ -105,7 +98,7 @@ export class ProductsService {
     });
   }
 
-  // 🔹 FILTER BY STOCK AVAILABLE
+
   async filterByStock() {
     return this.productModel.find({
       stock: { $gt: 0 },

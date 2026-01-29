@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TasksService } from './services/tasks.service';
-import { EmailQueueModule } from './queue.module'; // 🔴 import module
-
+import { EmailQueueModule } from './queue.module';
 @Module({
   imports: [
-    EmailQueueModule, // 🔴 THIS IS REQUIRED
+    EmailQueueModule, 
   ],
   providers: [TasksService],
 })

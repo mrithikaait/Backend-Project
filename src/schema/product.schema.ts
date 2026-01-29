@@ -15,11 +15,10 @@ export class Product extends Document {
   @Prop({ default: 0 })
   stock: number;
 
-  // 🔹 Single image
   @Prop()
   image: string;
 
-  // 🔹 Multiple images
+
   @Prop({ type: [String] })
   images: string[];
 

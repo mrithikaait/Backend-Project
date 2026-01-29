@@ -19,7 +19,6 @@ import { ProductsService } from '../services/products.service';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  // 🔹 CREATE PRODUCT WITH SINGLE IMAGE
   @Post('single')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -40,7 +39,6 @@ export class ProductsController {
     return this.productsService.create(data);
   }
 
-  // 🔹 CREATE PRODUCT WITH MULTIPLE IMAGES
   @Post('multiple')
   @UseInterceptors(
     FilesInterceptor('images', 5, {
@@ -64,7 +62,6 @@ export class ProductsController {
     return this.productsService.create(data);
   }
 
-  // 🔹 SERVER SIDE LIST WITH FILTER + SORT + PAGINATION  ✅ (MAIN LIST API)
   @Get()
   async findAll(
     @Query('page') page = '1',
@@ -84,13 +81,11 @@ export class ProductsController {
     });
   }
 
-  // 🔹 GET ONE PRODUCT BY ID
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(id);
   }
 
-  // 🔹 UPDATE PRODUCT WITH SINGLE IMAGE
   @Put(':id')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -111,7 +106,7 @@ export class ProductsController {
     return this.productsService.update(id, data);
   }
 
-  // 🔹 DELETE PRODUCT
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productsService.remove(id);

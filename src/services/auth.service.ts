@@ -38,31 +38,26 @@ export class AuthService {
   }
 
 
-  // 🔹 LOGIN (IMPORTANT PART 🔥)
   async login(email: string, password: string) {
     try {
-      // 1️⃣ Check user exists
+
       const user = await this.usersService.findByEmail(email);
       if (!user) {
         throw new BadRequestException('Invalid email or password');
       }
 
-      // 2️⃣ Compare password
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         throw new BadRequestException('Invalid email or password');
       }
 
-      // 3️⃣ Create JWT payload
       const payload = {
         id: user._id,
         role: user.role,
       };
 
-      // 4️⃣ Generate token
       const token = this.jwtService.sign(payload);
 
-      // 5️⃣ Return response
       return {
         message: 'Login successful',
         token: token,

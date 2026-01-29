@@ -10,6 +10,6 @@ export class LoggerMiddleware implements NestMiddleware {
     console.log('Time:', new Date().toLocaleString());
     console.log('-----------------------------');
 
-    next(); // VERY IMPORTANT (moves to next step)
+    next(); 
   }
 }

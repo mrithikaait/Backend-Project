@@ -1,21 +1,4 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { UsersService } from './users.service';
 
-// describe('UsersService', () => {
-//   let service: UsersService;
-
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [UsersService],
-//     }).compile();
-
-//     service = module.get<UsersService>(UsersService);
-//   });
-
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { getModelToken } from '@nestjs/mongoose';
@@ -48,7 +31,6 @@ describe('UsersService', () => {
   it('should find user by email', async () => {
     const mockUser = { email: 'test@gmail.com' };
 
-    // mock mongoose findOne result
     model.findOne.mockResolvedValue(mockUser);
 
     const result = await service.findByEmail('test@gmail.com');

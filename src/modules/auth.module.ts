@@ -8,8 +8,8 @@ import { UsersModule } from './users.module';
   imports: [
     UsersModule,
     JwtModule.register({
-      secret: 'mySecretKey', // later env file use pannalaam
-      signOptions: { expiresIn: '1d' }, // token valid for 1 day
+      secret: 'mySecretKey', 
+      signOptions: { expiresIn: '1d' }, 
     }),
   ],
   providers: [AuthService],
